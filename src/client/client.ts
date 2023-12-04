@@ -41,7 +41,9 @@ export default class Fonzi2Client extends Client {
 
 				if (matchedCommand) {
 					const { name, method } = matchedCommand;
-					Logger.info(`Received command ${name} from ${interaction.user.username}`);
+					Logger.info(
+						`Received command \`${name}\` from \`${interaction.user.username}\` in \`${interaction.guild?.name}\``
+					);
 					method.call(
 						commandInteractionsHandler,
 						interaction as ChatInputCommandInteraction

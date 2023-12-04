@@ -40,10 +40,11 @@ export enum DC {
 	magenta = 15418782,
 	cyan = 1752220,
 	white = 16777215,
+	underline = 0,
 }
 
 export class Logger {
-	protected static readonly pattern = `${CC.gray}[%time]$ %color%level$ ${CC.white}%msg$`;
+	private static readonly pattern = `${CC.gray}[%time]$ %color%level$ ${CC.white}%msg$`;
 	static remoteEnabled = true;
 
 	public static info(msg: string): void {

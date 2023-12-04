@@ -1,0 +1,190 @@
+@import url("https://fonts.cdnfonts.com/css/deliciousoutline");
+@import url("https://fonts.cdnfonts.com/css/montserrat");
+select {
+  padding: 0.5rem !important;
+  border-radius: 0.375rem;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+body {
+  margin: 0 0;
+  font-family: "Montserrat", Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+  width: 100dvw;
+}
+
+header {
+  background-color: #343945;
+}
+
+div.content {
+  background-color: #474e5d;
+}
+
+footer {
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  background-color: #343945;
+}
+
+footer p {
+  /*font size depends on media*/
+  color: white;
+}
+
+optgroup[label=NSFW] {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+span#title {
+  /*font size depends on media*/
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: default;
+  color: white;
+  font-weight: bold;
+  font-family: "DeliciousOutline";
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#album {
+  overflow-x: auto;
+  white-space: nowrap;
+  background-color: #586174;
+  z-index: 10;
+  display: block;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+::-webkit-scrollbar {
+  height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+
+#album .album-img {
+  display: inline-block;
+  width: auto;
+  height: 80px;
+  margin-right: 0.5rem;
+  -o-object-fit: contain;
+     object-fit: contain;
+  transition: 0.3s all;
+}
+
+#album:has(.album-img:hover) .album-img:not(.album-img:hover) {
+  opacity: 0.3;
+}
+
+@media only screen and (max-device-width: 926px) {
+  header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    gap: 0.25rem;
+    padding: 1rem 0;
+  }
+  span#title {
+    font-size: 1pc;
+  }
+  button {
+    border-radius: 5px;
+    padding: 0.25rem;
+  }
+  button.send {
+    display: none;
+  }
+  select {
+    padding: 0.25rem;
+    border-radius: 5px;
+    border: none;
+    width: 80%;
+  }
+  main {
+    display: flex;
+    min-height: 82vh;
+  }
+  main img.pic {
+    height: 82vh;
+    width: 100%;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+  footer div {
+    display: flex;
+    align-items: center;
+  }
+  footer p {
+    font-size: smaller;
+  }
+  .desktop-only {
+    display: none;
+  }
+}
+@media only screen and (min-width: 927px) and (orientation: landscape) {
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  span#title {
+    font-size: 2pc;
+  }
+  select {
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  select:focus {
+    outline: none;
+    box-shadow: 0px 0px 3px #007bff;
+  }
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+  }
+  main img.pic {
+    height: 80vh;
+    width: auto;
+    -o-object-fit: contain;
+       object-fit: contain;
+  }
+  footer p {
+    font-size: large;
+  }
+  .mobile-only {
+    display: none;
+  }
+}

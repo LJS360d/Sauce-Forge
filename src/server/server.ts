@@ -9,9 +9,9 @@ import { DiscordUserInfo } from '../types/discord.user.info';
 export class Fonzi2Server {
 	private readonly startTime = Date.now();
 	private port: number = env.PORT;
-	private app: express.Application;
+	protected app: express.Application;
 	private httpServer: http.Server;
-	constructor(private client: Client) {
+	constructor(protected client: Client) {
 		this.app = express();
 		this.httpServer = http.createServer(this.app);
 		this.app.use(express.static('public'));
@@ -27,6 +27,13 @@ export class Fonzi2Server {
 	}
 
 	start() {
+		this.app.get('/', this.authorize.bind(this));
+		this.app.get('/unauthorized', this.unauthorized.bind(this));
+		this.app.get('/notfound', this.notFound.bind(this));
+		this.app.get('/login', this.login.bind(this));
+		this.app.post('/login', this.loginPost.bind(this));
+		this.app.get('/dashboard', this.dashboard.bind(this));
+		this.app.use(this.notFoundMiddleware.bind(this));
 		this.httpServer.listen(this.port, () => {
 			if (env.NODE_ENV === 'development') {
 				Logger.info(
@@ -34,15 +41,7 @@ export class Fonzi2Server {
 				);
 			} else Logger.info(`Server open on port ${env.PORT}`);
 		});
-		this.app.get('/', this.authorize.bind(this));
-		this.app.get('/unauthorized', this.unauthorized.bind(this));
-		this.app.get('/notfound', this.notFound.bind(this));
-		this.app.get('/login', this.login.bind(this));
-		this.app.post('/login', this.loginPost.bind(this));
-		this.app.get('/dashboard', this.dashboard.bind(this));
-
-		this.app.use(this.notFoundMiddleware.bind(this));
-
+    // for dev server fast restart
 		process.on('SIGTERM', () => {
 			this.stop();
 		});

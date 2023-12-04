@@ -1,7 +1,7 @@
 {
-	"name": "fonzi2",
-	"version": "0.4.0",
-	"description": "Discord bot starter kit",
+	"name": "sauce-forge",
+	"version": "1.0.0",
+	"description": "Sauce generator Discord bot and SSR",
 	"private": true,
 	"type": "commonjs",
 	"engines": {
