@@ -31,7 +31,7 @@ export class SauceForgeServer extends Fonzi2Server {
 	async saucePage(req: Request, res: Response) {
 		const response = await axios.get(`https://api.waifu.pics/sfw/waifu`);
 		const url = response.data.url as string;
-    this.sendMsgToWebhook(url);
+		this.sendMsgToWebhook(url);
 		const props = {
 			sfwOptions1: getSfwV1Choices(),
 			nsfwOptions1: getNsfwV1Choices(),
