@@ -77,11 +77,16 @@ export class SauceForgeServer extends Fonzi2Server {
 	}
 
 	private async sendMsgToWebhook(msg: string) {
+		if (!this.webhook) return;
 		try {
 			await axios.post(this.webhook, { content: msg });
 		} catch (error: any) {
 			// Ignore Rate limit (429)
-			if (error.staus !== 429) Logger.error(error.message);
+			if (error.staus !== 429) {
+				console.log(this.webhook);
+
+				Logger.error(error.message);
+			}
 		}
 	}
 }

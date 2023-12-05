@@ -13,7 +13,7 @@ const client = new Fonzi2Client(
 client.login(env.TOKEN);
 
 process.on('uncaughtException', (err) => {
-	Logger.error(`${err.name}: ${err.message}\n${err.stack}`);
+	Logger.error(`${err.name}: ${err.message}\n${err}`);
 });
 
 ['SIGINT', 'SIGTERM'].forEach((signal) => {

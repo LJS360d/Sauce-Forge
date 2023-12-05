@@ -42,15 +42,15 @@ Before you begin, ensure you have the following prerequisites installed:
 
 2. Navigate into the project directory:
 
-    ```bash
-    cd fonzi2
-    ```
+   ```bash
+   cd fonzi2
+   ```
 
 3. Install the project dependencies:
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 ### Quick Start
 
@@ -62,35 +62,35 @@ Before you begin, ensure you have the following prerequisites installed:
 
 4. [ServerSide OAuth2] Generate an OAuth2 URL using the OAuth2 URL Generator in the Discord Developer Portal. Select the "identify" scope and `http://localhost:<port>/` as your redirect uri for development and **CHANGE `response_type` to `token`**.
 
-    - For production: you will need to create a new OAuth2 url using the hostname of your deployment (ex. https://fonzi2.ljs360d.repl.co/ as the redirect uri), remember to **CHANGE `response_type` to `token`**.
+   - For production: you will need to create a new OAuth2 url using the hostname of your deployment (ex. https://fonzi2.ljs360d.repl.co/ as the redirect uri), remember to **CHANGE `response_type` to `token`**.
 
 5. Invite the bot to a server using the Bot invite link.
 
 6. Create a `.env` file in the project root directory with the following properties:
 
-    ```bash
-    TOKEN=your-bot-token
-    LOG_WEBHOOK=optional-webhook-url
-    # ServerSide OAuth2 
-    OAUTH2_URL=your-oauth2-url
-    OWNER_IDS=your-owner-ids
-    ```
+   ```bash
+   TOKEN=your-bot-token
+   LOG_WEBHOOK=optional-webhook-url
+   # ServerSide OAuth2
+   OAUTH2_URL=your-oauth2-url
+   OWNER_IDS=your-owner-ids
+   ```
 
-6. Replace the placeholders with your actual values:
+7. Replace the placeholders with your actual values:
 
 - `TOKEN`: The bot token obtained from the Discord Developer Portal.
 - `LOG_WEBHOOK`: An optional webhook URL to receive bot logs.
 - `OAUTH2_URL`: The generated OAuth2 URL, **CHANGE `response_type` to `token`**.
 - `OWNER_IDS`: A comma-separated list of discord user IDs with administrative privileges.
-    - User IDs are public and can be obtained by being in developer mode in discord and right clicking on a user, here they are used to access the admin dashboard after using the discord OAuth2 service, so you should add your account's User ID and whoever elses you would want to add as an admin for your bot.
+  - User IDs are public and can be obtained by being in developer mode in discord and right clicking on a user, here they are used to access the admin dashboard after using the discord OAuth2 service, so you should add your account's User ID and whoever elses you would want to add as an admin for your bot.
 
 7. Configure the bot intents in the `src\client\options.ts` file. Select only the necessary intents to improve bot efficiency and security.
 
 8. Start the bot in development mode:
 
-    ```bash
-    npm run dev
-    ```
+   ```bash
+   npm run dev
+   ```
 
 This will start the bot and serverside in development mode, allowing you to test and debug your commands and functionalities.
 
@@ -139,7 +139,7 @@ You can host your bot on a dedicated server using the [pm2 package](https://pm2.
    ```
 6. Build the project and start the process
    ```bash
-   npm run  
+   npm run
    pm2 start npm --name "fonzi2" -- start
    ```
    - Replace "fonzi2" with your desired PM2 process name.
@@ -171,7 +171,7 @@ By far the simplest way to host a Discord bot for **free**, this approach is exc
 2. **Setup secrets**
    - Instead of creating a `.env` file, on replit, you have to specify your environment variables in the **Secrets** tool
    - Just like with the `.env` you will need a `TOKEN` and a `LOG_WEBHOOK` secrets for the bot to work and the OAuth2 Secrets for the serverside dashboard
-   - For this purpose there is an npm script that you should run before deployment: `npm run build:secret` that will parse your .env into a JSON file to be quickly inserted into the replit secrets, but remember to change the serverside OAuth2 url to the production one.  
+   - For this purpose there is an npm script that you should run before deployment: `npm run build:secret` that will parse your .env into a JSON file to be quickly inserted into the replit secrets, but remember to change the serverside OAuth2 url to the production one.
 3. Start the Bot
    - Click on the "Start" button in the toolbar
 4. Keep the Repl Alive:

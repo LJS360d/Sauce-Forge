@@ -1,6 +1,8 @@
 import 'dotenv/config';
 import { BaseEnv } from '../types/env/base.env';
 export const env = {
+  SAUCE_WEBHOOK: process.env.SAUCE_WEBHOOK,
+  // Defaults
 	// ! [REQUIRED] the discord bot's token
 	TOKEN: process.env.TOKEN!,
 	// ? [Recommended] a webhook for logs
@@ -16,6 +18,6 @@ export const env = {
 	NODE_ENV: (process.env.NODE_ENV || 'development') as
 		| 'development'
 		| 'staging'
-    | 'test'
+		| 'test'
 		| 'production',
 } as BaseEnv;

@@ -19,8 +19,6 @@ export class Fonzi2Server {
 		this.app.use(
 			session({
 				secret: 'boo',
-				resave: false,
-				saveUninitialized: false,
 			})
 		);
 		this.app.set('view engine', 'ejs');
@@ -41,7 +39,7 @@ export class Fonzi2Server {
 				);
 			} else Logger.info(`Server open on port ${env.PORT}`);
 		});
-    // for dev server fast restart
+		// for dev server fast restart
 		process.on('SIGTERM', () => {
 			this.stop();
 		});

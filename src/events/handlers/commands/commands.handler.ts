@@ -1,5 +1,4 @@
 import { CacheType, ChatInputCommandInteraction, CommandInteraction } from 'discord.js';
-import { env } from '../../../main';
 import { Command } from '../../decorators/command.decorator';
 import { DiscordEventsHandler } from '../base.handler';
 import { InteractionsService } from './interactions.service';
@@ -9,6 +8,7 @@ import {
 	getSfwV1Choices,
 	getSfwV2Choices,
 } from './command.options.choices';
+import { env } from '../../../lib/env';
 
 export class CommandInteractionsHandler extends DiscordEventsHandler {
 	interactionsService: InteractionsService;
