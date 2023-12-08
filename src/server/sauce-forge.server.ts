@@ -9,6 +9,7 @@ import {
 	getSfwV1Choices,
 	getSfwV2Choices,
 } from '../events/handlers/commands/command.options.choices';
+import { env } from '../lib/env';
 
 export class SauceForgeServer extends Fonzi2Server {
 	constructor(
@@ -37,6 +38,7 @@ export class SauceForgeServer extends Fonzi2Server {
 			nsfwOptions1: getNsfwV1Choices(),
 			sfwOptions2: getSfwV2Choices(),
 			nsfwOptions2: getNsfwV2Choices(),
+      inviteLink: env.INVITE_LINK,
 			startImgUrl: url,
 		};
 		res.render('pages/sauce', props);
