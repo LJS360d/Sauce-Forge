@@ -15,7 +15,7 @@ export class ClientEventsHandler extends DiscordEventsHandler {
 			Logger.info('Started refreshing application (/) commands.');
 			await this.client?.application?.commands.set(DecoratorsMetadataAccess.commands);
 			Logger.info('Successfully reloaded application (/) commands.');
-			new SauceForgeServer(this.client!, env.SAUCE_WEBHOOK).start();
+			new SauceForgeServer(this.client!, env.SAUCE_WEBHOOKS).start();
 		} catch (err: any) {
 			Logger.error(err);
 		}

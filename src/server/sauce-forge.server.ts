@@ -14,7 +14,7 @@ import { env } from '../lib/env';
 export class SauceForgeServer extends Fonzi2Server {
 	constructor(
 		client: Client,
-		private webhook: string
+		private webhooks: string[]
 	) {
 		super(client);
 	}
@@ -38,7 +38,7 @@ export class SauceForgeServer extends Fonzi2Server {
 			nsfwOptions1: getNsfwV1Choices(),
 			sfwOptions2: getSfwV2Choices(),
 			nsfwOptions2: getNsfwV2Choices(),
-      inviteLink: env.INVITE_LINK,
+			inviteLink: env.INVITE_LINK,
 			startImgUrl: url,
 		};
 		res.render('pages/sauce', props);
@@ -79,16 +79,16 @@ export class SauceForgeServer extends Fonzi2Server {
 	}
 
 	private async sendMsgToWebhook(msg: string) {
-		if (!this.webhook) return;
-		try {
-			await axios.post(this.webhook, { content: msg });
-		} catch (error: any) {
-			// Ignore Rate limit (429)
-			if (error.staus !== 429) {
-				console.log(this.webhook);
-
-				Logger.error(error.message);
+		if (!this.webhooks.length) return;
+		this.webhooks.forEach(async (webhook) => {
+			try {
+				await axios.post(webhook, { content: msg });
+			} catch (error: any) {
+				// Ignore Rate limit (429)
+				if (error.staus !== 429) {
+					Logger.error(error.message);
+				}
 			}
-		}
+		});
 	}
 }

@@ -1,5 +1,5 @@
 export type BaseEnv = Readonly<{
-  SAUCE_WEBHOOK: string;
+  SAUCE_WEBHOOKS: string[];
   INVITE_LINK: string;
 	TOKEN: string;
 	LOG_WEBHOOK: string | undefined;

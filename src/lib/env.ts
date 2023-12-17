@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { BaseEnv } from '../types/env/base.env';
 export const env = {
-  SAUCE_WEBHOOK: process.env.SAUCE_WEBHOOK,
+  SAUCE_WEBHOOKS: process.env.SAUCE_WEBHOOKS.split(','),
   INVITE_LINK: process.env.INVITE_LINK,
   // Defaults
 	// ! [REQUIRED] the discord bot's token
