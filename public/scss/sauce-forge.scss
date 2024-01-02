@@ -1,5 +1,6 @@
-@import url("https://fonts.cdnfonts.com/css/deliciousoutline");
-@import url("https://fonts.cdnfonts.com/css/montserrat");
+@import url('https://fonts.cdnfonts.com/css/deliciousoutline');
+@import url('https://fonts.cdnfonts.com/css/montserrat');
+
 [hidden] {
   display: none !important;
 }
@@ -13,18 +14,21 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
-}
-#album .album-img {
-  display: inline-block;
-  width: auto;
-  height: 80px;
-  margin-right: 0.5rem;
-  -o-object-fit: contain;
-  object-fit: contain;
-  transition: 0.3s all;
-}
-#album:has(.album-img:hover) .album-img:not(.album-img:hover) {
-  opacity: 0.3;
+
+  .album-img {
+    display: inline-block;
+    width: auto;
+    height: 80px;
+    margin-right: 0.5rem;
+    -o-object-fit: contain;
+    object-fit: contain;
+    transition: 0.3s all;
+  }
+
+  &:has(.album-img:hover) .album-img:not(.album-img:hover) {
+    opacity: 0.3;
+
+  }
 }
 
 ::-webkit-scrollbar {
@@ -36,6 +40,7 @@
   border-radius: 4px;
 }
 
+
 @media only screen and (max-device-width: 926px) {
   header {
     display: flex;
@@ -45,65 +50,80 @@
     gap: 0.25rem;
     padding: 1rem 0;
   }
+
   span#title {
     font-size: 1pc;
   }
+
   button {
     border-radius: 5px;
     padding: 0.25rem;
   }
+
   button.send {
     display: none;
   }
+
   select {
     padding: 0.25rem;
     border-radius: 5px;
     border: none;
     width: 80%;
   }
+
   main {
     display: flex;
     min-height: 82vh;
   }
+
   main img.pic {
     height: 82vh;
     width: 100%;
     -o-object-fit: contain;
     object-fit: contain;
   }
+
   footer div {
     display: flex;
     align-items: center;
   }
+
   footer p {
     font-size: smaller;
   }
+
   .desktop-only {
     display: none;
   }
 }
+
 @media only screen and (min-width: 927px) and (orientation: landscape) {
   body::-webkit-scrollbar {
     display: none;
   }
+
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
   }
+
   span#title {
     font-size: 2pc;
   }
+
   select {
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
   }
+
   select:focus {
     outline: none;
     box-shadow: 0px 0px 3px #007bff;
   }
+
   main {
     display: flex;
     justify-content: center;
@@ -113,15 +133,18 @@
     -moz-user-select: none;
     user-select: none;
   }
+
   main img.pic {
     height: 80vh;
     width: auto;
     -o-object-fit: contain;
     object-fit: contain;
   }
+
   footer p {
     font-size: large;
   }
+
   .mobile-only {
     display: none;
   }

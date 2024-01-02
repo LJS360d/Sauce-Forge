@@ -1,24 +1,18 @@
-import { CacheType, ChatInputCommandInteraction, CommandInteraction } from 'discord.js';
-import { Command } from '../../decorators/command.decorator';
-import { DiscordEventsHandler } from '../base.handler';
-import { InteractionsService } from './interactions.service';
+import { ChatInputCommandInteraction } from 'discord.js';
+import { Command, Handler, HandlerType } from 'fonzi2';
+import { InteractionsService } from '../services/interactions.service';
 import {
 	getNsfwV1Choices,
 	getNsfwV2Choices,
+	getNsfwV3Choices,
 	getSfwV1Choices,
 	getSfwV2Choices,
-} from './command.options.choices';
-import { env } from '../../../lib/env';
+} from '../static/command.options.choices';
 
-export class CommandInteractionsHandler extends DiscordEventsHandler {
-	interactionsService: InteractionsService;
-	constructor() {
+export class CommandInteractionsHandler extends Handler {
+	public readonly type = HandlerType.commandInteraction;
+	constructor(private interactionsService: InteractionsService) {
 		super();
-		this.interactionsService = new InteractionsService();
-	}
-	@Command({ name: 'version', description: 'get the application version' })
-	async handleVersion(interaction: CommandInteraction<CacheType>) {
-		await interaction.reply(env.VERSION);
 	}
 
 	@Command({
@@ -34,7 +28,7 @@ export class CommandInteractionsHandler extends DiscordEventsHandler {
 			},
 		],
 	})
-	async handleSfwV1(interaction: ChatInputCommandInteraction) {
+	async handleSfwV1(interaction: ChatInputCommandInteraction<'cached'>) {
 		await this.interactionsService.replySfwV1Image(interaction);
 	}
 
@@ -51,7 +45,7 @@ export class CommandInteractionsHandler extends DiscordEventsHandler {
 			},
 		],
 	})
-	async handleNsfwV1(interaction: ChatInputCommandInteraction) {
+	async handleNsfwV1(interaction: ChatInputCommandInteraction<'cached'>) {
 		await this.interactionsService.replyNsfwV1Image(interaction);
 	}
 
@@ -68,7 +62,7 @@ export class CommandInteractionsHandler extends DiscordEventsHandler {
 			},
 		],
 	})
-	async handleSfwV2(interaction: ChatInputCommandInteraction) {
+	async handleSfwV2(interaction: ChatInputCommandInteraction<'cached'>) {
 		await this.interactionsService.replySfwV2Image(interaction);
 	}
 
@@ -85,7 +79,24 @@ export class CommandInteractionsHandler extends DiscordEventsHandler {
 			},
 		],
 	})
-	async handleNsfwV2(interaction: ChatInputCommandInteraction) {
+	async handleNsfwV2(interaction: ChatInputCommandInteraction<'cached'>) {
 		await this.interactionsService.replyNsfwV2Image(interaction);
+	}
+
+	@Command({
+		name: 'nsfw3',
+		description: 'get a nsfw image/gif',
+		options: [
+			{
+				name: 'tag',
+				description: 'the image/gif tag',
+				type: 3,
+				required: true,
+				choices: getNsfwV3Choices(),
+			},
+		],
+	})
+	async handleNsfwV3(interaction: ChatInputCommandInteraction<'cached'>) {
+		await this.interactionsService.replyNsfwV3Image(interaction);
 	}
 }

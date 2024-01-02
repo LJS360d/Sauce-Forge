@@ -2,8 +2,8 @@ type CommandOptionChoice = { name: string; value: string };
 
 export function getSfwV1Choices(): CommandOptionChoice[] {
 	return [
-		{ value: 'waifu', name: 'Waifu' },
 		{ value: 'neko', name: 'Neko' },
+		{ value: 'waifu', name: 'Waifu' },
 		{ value: 'bully', name: 'Bully' },
 		{ value: 'cuddle', name: 'Cuddle' },
 		{ value: 'cry', name: 'Cry' },
@@ -32,34 +32,69 @@ export function getSfwV1Choices(): CommandOptionChoice[] {
 
 export function getSfwV2Choices(): CommandOptionChoice[] {
 	return [
-		{ value: 'waifu', name: 'Waifu' },
 		{ value: 'maid', name: 'Maid' },
+		{ value: 'waifu', name: 'Waifu' },
 		{ value: 'oppai', name: 'Oppai' },
 		{ value: 'uniform', name: 'Uniform' },
 		{ value: 'selfies', name: 'Selfies' },
-		{ value: 'marin-kitagawa', name: 'Marin Kitagawa' },
 		{ value: 'mori-calliope', name: 'Mori Calliope' },
 		{ value: 'raiden-shogun', name: 'Raiden Shogun' },
+    { value: 'marin-kitagawa', name: 'Marin Kitagawa' },
+	];
+}
+
+export function getSfwV3Choices(): CommandOptionChoice[] {
+	return [
+
 	];
 }
 
 export function getNsfwV1Choices(): CommandOptionChoice[] {
 	return [
-		{ value: 'waifu', name: 'Waifu' },
 		{ value: 'neko', name: 'Neko' },
 		{ value: 'trap', name: 'Trap' },
+		{ value: 'waifu', name: 'Waifu' },
 		{ value: 'blowjob', name: 'Blowjob' },
 	];
 }
 
 export function getNsfwV2Choices(): CommandOptionChoice[] {
 	return [
-		{ value: 'hentai', name: 'Hentai' },
-		{ value: 'milf', name: 'Milf' },
 		{ value: 'ass', name: 'Ass' },
-		{ value: 'paizuri', name: 'Paizuri' },
-		{ value: 'oral', name: 'Oral' },
-		{ value: 'ecchi', name: 'Ecchi' },
 		{ value: 'ero', name: 'Ero' },
+		{ value: 'oral', name: 'Oral' },
+		{ value: 'milf', name: 'Milf' },
+		{ value: 'ecchi', name: 'Ecchi' },
+		{ value: 'hentai', name: 'Hentai' },
+		{ value: 'paizuri', name: 'Paizuri' },
+	];
+}
+
+export function getNsfwV3Choices(): CommandOptionChoice[] {
+	return [
+    { value: 'ass', name: 'Ass' },
+		{ value: 'cum', name: 'Cum' },
+		{ value: 'gif', name: 'Gif' },
+		{ value: 'maid', name: 'Maid' },
+		{ value: 'orgy', name: 'Orgy' },
+		{ value: 'feet', name: 'Feet' },
+		{ value: 'yuri', name: 'Yuri' },
+		{ value: 'bdsm', name: 'BDSM' },
+		{ value: 'pussy', name: 'Pussy' },
+    { value: 'doujin', name: 'Doujin' },
+		{ value: 'femdom', name: 'Femdom' },
+		{ value: 'hentai', name: 'Hentai' },
+		{ value: 'thighs', name: 'Thighs' },
+		{ value: 'panties', name: 'Panties' },
+		{ value: 'cumslut', name: 'Cumslut' },
+		{ value: 'blowjob', name: 'Blowjob' },
+		{ value: 'foxgirl', name: 'Foxgirl' },
+		{ value: 'glasses', name: 'Glasses' },
+		{ value: 'uniform', name: 'Uniform' },
+		{ value: 'gangbang', name: 'Gangbang' },
+		{ value: 'succubus', name: 'Succubus' },
+		{ value: 'tentacles', name: 'Tentacles' },
+		{ value: 'zettai-ryouiki', name: 'Thighhighs' },
+		{ value: 'masturbation', name: 'Masturbation' },
 	];
 }

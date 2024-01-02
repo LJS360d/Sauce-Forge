@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/ce9bc4dbd7.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/sauce-forge.css">
+  <title>Sauce Forge</title>
+</head>
+
+<body class="flex h-full flex-col m-0">
+  <div class="drawer h-full">
+    <input id="hamburger" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-content">
+      <!-- Page content here -->
+      <header class="navbar bg-base-200">
+        <div class="navbar-start">
+          <label for="hamburger" class="btn drawer-button"><i class="fa-solid fa-bars text-xl"></i></label>
+        </div>
+        <div class="navbar-center">
+          <img src="assets/sauce_forge_logo.svg" class="h-8 mr-8 sm:h-8 md:h-12 md:mr-0" alt="logo">
+        </div>
+        <div class="navbar-end">
+          <select id="image-select" class="max-w-xs select select-secondary w-full">
+            <!-- built at runtime -->
+          </select>
+        </div>
+      </header>
+      <main id="main" class="flex-1 flex flex-col items-center">
+        <img id="mainImg" src=<%= startImgUrl %> loading="lazy" class="h-[80vh] object-contain">
+      </main>
+      <div id="album"></div>
+      <footer class="footer p-4 flex justify-between bg-base-200 md:p-6">
+        <div class="footer-start">
+          <div class="form-control">
+            <button id="clear-album" onclick="clearAlbum()" class="btn btn-outline btn-secondary">Clear
+              Album</button>
+          </div>
+        </div>
+        <div class="footer-center">
+          <a href="<%= inviteLink %>" title="Click for the discord bot">
+            <span class="">Click for the discord bot invite link</span>
+            <i class="fa-brands fa-discord"></i>
+          </a>
+        </div>
+        <div class="footer-end">
+          <p class="hidden md:block md:text-lg">
+            Click on the page to get a new image
+          </p>
+          <p class="text-md sm:text-md md:hidden">
+            Tap on the screen to get a new image
+          </p>
+        </div>
+      </footer>
+    </div>
+    <div class="drawer-side">
+      <label for="hamburger" aria-label="close sidebar" class="drawer-overlay"></label>
+      <ul class="menu min-w-40 min-h-full bg-base-200 text-base-content">
+        <label for="hamburger" class="btn-ghost drawer-button"><i class="fa-solid fa-xmark text-xl"></i></label>
+        <li>
+          <select id="api-select" class="select select-secondary w-full">
+            <option disabled>Select the image group</option>
+            <option value="v1" selected>V1</option>
+            <option value="v2">V2</option>
+            <option value="v3">V3</option>
+          </select>
+        </li>
+        <li>
+          <div class="form-control">
+            <span class="footer-title">
+              Toggle Album
+            </span>
+            <label class="cursor-pointer label">
+              <input id="toggle-album" type="checkbox" class="toggle toggle-secondary" checked
+                oninput=" album.hidden = !this.checked; " />
+            </label>
+          </div>
+        </li>
+        <li>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script type="module">
+    const v1Options = `
+    <optgroup label="SFW">
+          <% sfwOptions1.forEach((opt)=> { %>
+            <option value="<%= opt.value %>">
+              <%= opt.name %>
+            </option>
+            <% }); %>
+        </optgroup>
+        <optgroup label="NSFW" class="text-red-500 font-bold">
+          <% nsfwOptions1.forEach((opt)=> { %>
+            <option value="<%= opt.value %>">
+              <%= opt.name %>
+            </option>
+            <% }); %>
+        </optgroup>
+    `;
+    const v2Options = `
+    <optgroup label="SFW">
+          <% sfwOptions2.forEach((opt)=> { %>
+            <option value="<%= opt.value %>">
+              <%= opt.name %>
+            </option>
+            <% }); %>
+        </optgroup>
+        <optgroup label="NSFW" class="text-red-500 font-bold">
+          <% nsfwOptions2.forEach((opt)=> { %>
+            <option value="<%= opt.value %>">
+              <%= opt.name %>
+            </option>
+            <% }); %>
+        </optgroup>
+    `;
+    const v3Options = `
+    <optgroup label="SFW">
+          <% sfwOptions3.forEach((opt)=> { %>
+            <option value="<%= opt.value %>">
+              <%= opt.name %>
+            </option>
+            <% }); %>
+        </optgroup>
+        <optgroup label="NSFW" class="text-red-500 font-bold">
+          <% nsfwOptions3.forEach((opt)=> { %>
+            <option value="<%= opt.value %>">
+              <%= opt.name %>
+            </option>
+            <% }); %>
+        </optgroup>
+    `;
+
+    let selectedOptions = localStorage.getItem('selected-options') || v1Options;
+    let selectedVersion = localStorage.getItem('selected-version') || 'v1';
+    const imgSelect = document.getElementById('image-select');
+    const apiSelect = document.getElementById('api-select');
+    apiSelect.onchange = () => {
+      switch (apiSelect.value) {
+        case 'v1':
+          imgSelect.innerHTML = v1Options;
+          break;
+        case 'v2':
+          imgSelect.innerHTML = v2Options;
+          break;
+        case 'v3':
+          imgSelect.innerHTML = v3Options;
+          break;
+      }
+      selectedVersion = apiSelect.value;
+      selectedOptions = imgSelect.innerHTML;
+      localStorage.setItem('selected-options', selectedOptions);
+      localStorage.setItem('selected-version', selectedVersion);
+    }
+    imgSelect.innerHTML = selectedOptions;
+    apiSelect.value = selectedVersion;
+
+    imgSelect.onchange = getNewImage;
+    document.getElementById('main').onclick = getNewImage;
+
+    async function getNewImage() {
+      const tag = imgSelect.value;
+      const type = String(
+        imgSelect.options[imgSelect.selectedIndex].parentNode.label
+      ).toLowerCase();
+      if (selectedVersion === 'v1') {
+        const { url } = await (await fetch(`/api/pics/v1?type=${type}&category=${tag}`)).json();
+        renderImage(url);
+        return;
+      }
+      const { url } = await (await fetch(`/api/pics/${selectedVersion}?tag=${tag}`)).json();
+      renderImage(url);
+    }
+
+    function renderImage(url) {
+      const img = document.createElement('img');
+      img.className = "h-[80vh] object-contain sm:object-scale-down";
+      img.loading = 'lazy';
+      img.src = url;
+      addToAlbum(url);
+      const main = document.getElementById('main');
+      while (main.firstChild) main.removeChild(main.lastChild);
+      main.appendChild(img);
+    }
+
+
+    const collection = sessionStorage.getItem('album') ?
+      sessionStorage.getItem('album').split(',') :
+      [];
+    function addToAlbum(url) {
+      if (!collection.includes(url)) {
+        collection.push(url);
+        const image = document.createElement('img');
+        image.src = url;
+        image.loading = 'lazy';
+        image.className = 'album-img';
+        image.onclick = function () {
+          renderImage(this.src);
+        };
+        album.appendChild(image);
+      }
+    }
+    renderSessionAlbum();
+    function renderSessionAlbum() {
+      const album = document.getElementById('album');
+      if (collection != null) {
+        collection.forEach((url) => {
+          addImage(url);
+        });
+      }
+      function addImage(url) {
+        const image = document.createElement('img');
+        image.src = url;
+        image.className = 'album-img';
+        image.onclick = function () {
+          renderImage(this.src);
+        };
+        album.appendChild(image);
+      }
+    }
+
+    window.addEventListener('beforeunload', function () {
+      sessionStorage.setItem('album', collection);
+    })
+  </script>
+
+  <script type="text/javascript">
+    function clearAlbum() {
+      sessionStorage.removeItem('album');
+      const album = document.getElementById('album');
+      while (album.firstChild) {
+        album.removeChild(album.lastChild);
+      }
+    }
+  </script>
+</body>
+
+</html>

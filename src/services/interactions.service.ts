@@ -1,17 +1,16 @@
 import axios, { AxiosInstance } from 'axios';
 import { ChatInputCommandInteraction } from 'discord.js';
-import { env } from '../../../lib/env';
 
 export class InteractionsService {
-	api: AxiosInstance;
+	private api: AxiosInstance;
 
-	constructor() {    
+	constructor(baseUrl: string) {
 		this.api = axios.create({
-			baseURL: `http://localhost:${env.PORT}`,
+			baseURL: baseUrl,
 		});
 	}
 
-	async replySfwV1Image(interaction: ChatInputCommandInteraction) {
+	async replySfwV1Image(interaction: ChatInputCommandInteraction<"cached">) {
 		const type = 'sfw';
 		const category = interaction.options.getString('tag');
 		const response = await this.api.get(`api/pics/v1?type=${type}&category=${category}`);
@@ -19,7 +18,7 @@ export class InteractionsService {
 		await interaction.reply(url);
 	}
 
-	async replyNsfwV1Image(interaction: ChatInputCommandInteraction) {
+	async replyNsfwV1Image(interaction: ChatInputCommandInteraction<"cached">) {
 		const type = 'nsfw';
 		const category = interaction.options.getString('tag');
 		const response = await this.api.get(`api/pics/v1?type=${type}&category=${category}`);
@@ -27,16 +26,30 @@ export class InteractionsService {
 		await interaction.reply(url);
 	}
 
-	async replySfwV2Image(interaction: ChatInputCommandInteraction) {
+	async replySfwV2Image(interaction: ChatInputCommandInteraction<"cached">) {
 		const tag = interaction.options.getString('tag');
 		const response = await this.api.get(`api/pics/v2?tag=${tag}`);
 		const { url } = response.data;
 		await interaction.reply(url);
 	}
 
-	async replyNsfwV2Image(interaction: ChatInputCommandInteraction) {
+	async replyNsfwV2Image(interaction: ChatInputCommandInteraction<"cached">) {
 		const tag = interaction.options.getString('tag');
 		const response = await this.api.get(`api/pics/v2?tag=${tag}`);
+		const { url } = response.data;
+		await interaction.reply(url);
+	}
+
+  async replySfwV3Image(interaction: ChatInputCommandInteraction<"cached">) {
+		const tag = interaction.options.getString('tag');
+		const response = await this.api.get(`api/pics/v3?tag=${tag}`);
+		const { url } = response.data;
+		await interaction.reply(url);
+	}
+
+  async replyNsfwV3Image(interaction: ChatInputCommandInteraction<"cached">) {
+		const tag = interaction.options.getString('tag');
+		const response = await this.api.get(`api/pics/v3?tag=${tag}`);
 		const { url } = response.data;
 		await interaction.reply(url);
 	}
