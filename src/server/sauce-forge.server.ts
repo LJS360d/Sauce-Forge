@@ -74,13 +74,13 @@ export class SauceForgeServer extends Fonzi2Server {
 	}
 
 	async picsV2(req: Request, res: Response) {
-		const { tag } = req.query;
+		const { tag, type } = req.query;
 		if (!tag) {
 			res.status(400).json({ error: 'Invalid query params' });
 			return;
 		}
-		const response = await axios.get(`https://api.waifu.im/search/?included_tags=${tag}`);
-		const url = response.data.images[0].url as string;
+		const response = await axios.get(`https://api.waifu.im/images/?includedTags=${tag}&isNsfw=${String(String(type).toLowerCase()=="nsfw"}`);
+		const url = response.data.items[0].url as string;
 		this.sendMsgToWebhook(url);
 		res.status(200).json({ url });
 	}
