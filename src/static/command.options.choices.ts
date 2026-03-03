@@ -32,15 +32,75 @@ export function getSfwV1Choices(): CommandOptionChoice[] {
 
 export function getSfwV2Choices(): CommandOptionChoice[] {
 	return [
-		{ value: 'maid', name: 'Maid' },
-		{ value: 'waifu', name: 'Waifu' },
-		{ value: 'oppai', name: 'Oppai' },
-		{ value: 'uniform', name: 'Uniform' },
-		{ value: 'selfies', name: 'Selfies' },
-		{ value: 'mori-calliope', name: 'Mori Calliope' },
-		{ value: 'raiden-shogun', name: 'Raiden Shogun' },
-    { value: 'marin-kitagawa', name: 'Marin Kitagawa' },
-	];
+    {
+        "value": "waifu",
+        "name": "Waifu"
+    },
+    {
+        "value": "ero",
+        "name": "Ero"
+    },
+    {
+        "value": "ecchi",
+        "name": "Ecchi"
+    },
+    {
+        "value": "oppai",
+        "name": "Oppai"
+    },
+    {
+        "value": "hentai",
+        "name": "Hentai"
+    },
+    {
+        "value": "milf",
+        "name": "MILF"
+    },
+    {
+        "value": "uniform",
+        "name": "Uniform"
+    },
+    {
+        "value": "ass",
+        "name": "Ass"
+    },
+    {
+        "value": "maid",
+        "name": "Maid"
+    },
+    {
+        "value": "selfies",
+        "name": "Selfies"
+    },
+    {
+        "value": "oral",
+        "name": "Oral"
+    },
+    {
+        "value": "paizuri",
+        "name": "Paizuri"
+    },
+    {
+        "value": "genshin-impact",
+        "name": "Genshin Impact"
+    },
+    {
+        "value": "raiden-shogun",
+        "name": "Raiden Shogun"
+    },
+    {
+        "value": "marin-kitagawa",
+        "name": "Marin Kitagawa"
+    },
+    {
+        "value": "mori-calliope",
+        "name": "Mori Calliope"
+    },
+    {
+        "value": "kamisato-ayaka",
+        "name": "kamisato-ayaka"
+    }
+  ];
 }
 
 export function getSfwV3Choices(): CommandOptionChoice[] {
@@ -60,13 +120,74 @@ export function getNsfwV1Choices(): CommandOptionChoice[] {
 
 export function getNsfwV2Choices(): CommandOptionChoice[] {
 	return [
-		{ value: 'ass', name: 'Ass' },
-		{ value: 'ero', name: 'Ero' },
-		{ value: 'oral', name: 'Oral' },
-		{ value: 'milf', name: 'Milf' },
-		{ value: 'ecchi', name: 'Ecchi' },
-		{ value: 'hentai', name: 'Hentai' },
-		{ value: 'paizuri', name: 'Paizuri' },
+    {
+        "value": "waifu",
+        "name": "Waifu"
+    },
+    {
+        "value": "ero",
+        "name": "Ero"
+    },
+    {
+        "value": "ecchi",
+        "name": "Ecchi"
+    },
+    {
+        "value": "oppai",
+        "name": "Oppai"
+    },
+    {
+        "value": "hentai",
+        "name": "Hentai"
+    },
+    {
+        "value": "milf",
+        "name": "MILF"
+    },
+    {
+        "value": "uniform",
+        "name": "Uniform"
+    },
+    {
+        "value": "ass",
+        "name": "Ass"
+    },
+    {
+        "value": "maid",
+        "name": "Maid"
+    },
+    {
+        "value": "selfies",
+        "name": "Selfies"
+    },
+    {
+        "value": "oral",
+        "name": "Oral"
+    },
+    {
+        "value": "paizuri",
+        "name": "Paizuri"
+    },
+    {
+        "value": "genshin-impact",
+        "name": "Genshin Impact"
+    },
+    {
+        "value": "raiden-shogun",
+        "name": "Raiden Shogun"
+    },
+    {
+        "value": "marin-kitagawa",
+        "name": "Marin Kitagawa"
+    },
+    {
+        "value": "mori-calliope",
+        "name": "Mori Calliope"
+    },
+    {
+        "value": "kamisato-ayaka",
+        "name": "kamisato-ayaka"
+    }
 	];
 }
 
