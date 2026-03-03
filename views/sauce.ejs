@@ -173,7 +173,7 @@
         renderImage(url);
         return;
       }
-      const { url } = await (await fetch(`/api/pics/${selectedVersion}?tag=${tag}`)).json();
+      const { url } = await (await fetch(`/api/pics/${selectedVersion}?type=${type}&tag=${tag}`)).json();
       renderImage(url);
     }
 
